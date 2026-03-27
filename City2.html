@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scribble City</title>
+    <style>
+        body {
+            background-color: #fdf5e6; /* Warm cream */
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Verdana, sans-serif;
+        }
+
+        /* The main layout, rebuilding your sketch */
+        #city-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columns */
+            grid-template-rows: 1fr 1fr;    /* 2 rows */
+            width: 100vw;
+            height: 100vh;
+            border: 20px solid black; /* The black border from your sketch */
+            box-sizing: border-box;
+            background-color: white; /* Behind the blocks */
+        }
+
+        /* Basic styling for all blocks */
+        .block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .block:hover {
+            opacity: 0.8;
+            transform: scale(0.98);
+        }
+
+        /* Specific blocks using your colors */
+        
+        #block-school { 
+            background-color: #fca11a; /* Orange */
+            border-bottom: 5px solid black;
+        }
+        
+        #block-soccer { 
+            background-color: #0d8a0d; /* Green */
+            border-bottom: 5px solid black;
+            border-left: 5px solid black;
+        }
+        
+        #block-chick { 
+            background-color: #fffac2; /* Lighter yellow */
+            border-right: 5px solid black;
+        }
+        
+        #block-arcade { 
+            background-color: #4b0082; /* Deep Indigo/Purple */
+            color: white; /* White text for purple */
+        }
+
+        /* Labels for each place */
+        .title { font-size: 2.5rem; font-weight: bold; }
+        .subtitle { font-size: 1.2rem; margin-top: -10px;}
+
+        /* --- Dynamic Animal Citizens --- */
+        .resident {
+            position: absolute;
+            font-size: 3rem;
+            user-select: none;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
+        }
+
+        /* Styling for the audio player */
+        #player-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="city-grid">
+    <div id="block-school" class="block" onclick="goTo('school.html')">
+        <div class="title">School ✏️</div>
+        <div class="resident" style="top: 20px; left: 20px;">🦉</div> </div>
+
+    <div id="block-soccer" class="block" onclick="goTo('soccer.html')">
+        <div class="title">Soccer ⚽</div>
+        <div class="resident" style="bottom: 20px; right: 20px;">🐻</div> </div>
+
+    <div id="block-chick" class="block" onclick="goTo('cafe.html')">
+        <div class="title">Chick's Cafe 🐣</div>
+        <div class="resident" style="top: 40px;">🦊</div> </div>
+
+    <div id="block-arcade" class="block" onclick="goTo('arcade.html')">
+        <div class="title">Arcade 🕹️</div>
+        <div class="subtitle">(only have one game)</div>
+        <div class="resident" style="bottom: 40px;">🐶</div> </div>
+</div>
+
+<div id="player-container">
+    <p style="margin: 0 0 5px 0; color: #333;">City Loop 🎵</p>
+    <audio controls loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<script>
+    function goTo(page) {
+        window.location.href = page;
+    }
+
+    // Walking animation for residents
+    const residents = document.querySelectorAll('.resident');
+    residents.forEach(res => {
+        setInterval(() => {
+            // Random movement within a small box
+            const moveX = (Math.random() - 0.5) * 40;
+            const moveY = (Math.random() - 0.5) * 40;
+            res.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }, 2000);
+    });
+</script>
+
+</body>
+  </html>
+          
